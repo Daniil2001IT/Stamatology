@@ -1,0 +1,158 @@
+:root {
+	/*Элементы сетки*/
+	--gap: 0em;				/*Отступ между элементами*/
+	--col: 1;				/*Количество элементов в строке*/
+	--row: 1;				/*Количество элементов в столбце*/
+	--justify: flex-start;	/*Ориентация по горизонтали*/
+	--align: baseline;		/*Ориентация по вертикали*/
+	--direction: row;		/*Направление контейнера*/
+	--span: 1;				/*Ширина элемента в ячейках*/
+	
+	/*Медиа файлы*/
+	--position: relative;	/*Позиционирование обертки*/
+	--aspect: 2;			/*Отношение сторон*/
+	--fit: cover;			/*Покрытие контейнера*/
+	--pos: center;			/*Позиционирование в контейнере*/
+	
+	/*Контейнеры*/
+	--inden: 1.5em;			/*отступ контейнера*/
+	--content: 1600px;		/*Базовый контейнер*/
+	--content_min: 1400px;	/*Малый контейнер*/
+	--content_max: 1800px;	/*Большой контейнер*/
+}
+
+[imgWrap]>* {transition: all 0.3s ease;}
+
+[container] {
+	width: calc(100vw - (var(--inden) * 2));
+	margin: 0 auto;
+	box-sizing: border-box;
+}
+
+[container]			{max-width: var(--content);}
+[container*="Min"] 	{max-width: var(--content_min);}
+[container*="Max"] 	{max-width: var(--content_max);}
+
+/*Обертка медиа*/
+[imgWrap] {
+    position: var(--position);
+	aspect-ratio: var(--aspect-d, var(--aspect));
+    width: 100%;
+	display: block;
+    box-sizing: border-box;
+	
+}
+
+[imgWrap]>img, [imgWrap]>video, [imgWrap]>iframe, [imgWrap]>picture, [imgWrap]>svg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	object-fit: var(--fit);
+	object-position: var(--pos);
+	
+}
+
+[imgWrap*="square"]		{--aspect: 1;}					/* 1:1 Квадрат */
+[imgWrap*="wide"]		{--aspect: calc(21 / 9);}		/* 21:9 Широкоэкранный */
+[imgWrap*="ultrawd"]	{--aspect: calc(3 / 1);}		/* 3:1 Сверхширокий */
+[imgWrap*="vertical"]	{--aspect: calc(3 / 4);}		/* 3:4 Вертикальный */
+[imgWrap*="portrait"]	{--aspect: calc(9 / 16);}		/* 9:16 Вертикальный */
+[imgWrap*="golden"]		{--aspect: calc(8 / 5);}		/* 8:5 Золотое сечение */
+[imgWrap*="a4"]			{--aspect: calc(210 / 297);}	/* A4 (210×297 мм) */
+[imgWrap*="instagram"]	{--aspect: calc(4 / 5);}		/* 4:5 Instagram Portrait */
+[imgWrap*="cinema"]		{--aspect: calc(2.39 / 1);}		/* 2.39:1 Кинематографический */
+
+[imgWrap*="land"]		{--aspect-d: calc(1 / var(--aspect));} /* поворот */
+
+[imgWrap*="bgFill"] {									/* Использовать как фон */
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	z-index: -1;
+}
+
+[imgWrap]>img.loaded, [imgWrap]>video.loaded {
+  transform: scale(1);
+  opacity: 1;
+}
+
+[imgWrap*="cover"]				{--fit: cover;}			/* замостить обертку */
+[imgWrap*="contain"]			{--fit: contain;}		/* уместить в обертку */
+
+[imgWrap*="grayscale"]>* 		{filter: grayscale(1);} /* Эффект ч/б */
+[imgWrap*="grayscale"]:hover>* 	{filter: grayscale(0);}
+
+[imgWrap*="zoom"] 				{overflow:hidden;}		/* Зум при наведении */
+[imgWrap*="zoom"]>* 			{transform:scale(1);}
+[imgWrap*="zoom"]:hover>* 		{transform: scale(1.05)!important;}
+/*Обертка медиа*/
+
+[imgWrap] {
+	background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MCAyMCIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+Cgk8Y2lyY2xlIGZpbGw9IiNmZmYiIHN0cm9rZT0ibm9uZSIgY3g9IjgiIGN5PSIxMCIgcj0iNiI+CgkJPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgZHVyPSIxcyIgdmFsdWVzPSIwOzE7MCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGJlZ2luPSIwLjEiLz4gICAgCgk8L2NpcmNsZT4KCTxjaXJjbGUgZmlsbD0iI2ZmZiIgc3Ryb2tlPSJub25lIiBjeD0iMjUiIGN5PSIxMCIgcj0iNiI+CgkJPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgZHVyPSIxcyIgdmFsdWVzPSIwOzE7MCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGJlZ2luPSIwLjIiLz4gICAgICAgCgk8L2NpcmNsZT4KCTxjaXJjbGUgZmlsbD0iI2ZmZiIgc3Ryb2tlPSJub25lIiBjeD0iNDIiIGN5PSIxMCIgcj0iNiI+CgkJPGFuaW1hdGUgYXR0cmlidXRlTmFtZT0ib3BhY2l0eSIgZHVyPSIxcyIgdmFsdWVzPSIwOzE7MCIgcmVwZWF0Q291bnQ9ImluZGVmaW5pdGUiIGJlZ2luPSIwLjMiLz4gICAgIAoJPC9jaXJjbGU+Cjwvc3ZnPg==);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: max(20%, 50px);
+	transition: .1s;
+}
+
+[imgWrap]:has(.loaded) {
+    background-size: 0;
+}
+
+[imgWrap]>img, [imgWrap]>video {
+  opacity: 0;
+  transform: scale(0.95);
+  transition: 0.2s;
+}
+
+/*Флекс контейнеры*/
+[flexTail] {
+	position: relative;
+	display: flex;
+	gap: var(--gap);
+	flex-wrap: wrap;
+	justify-content: var(--justify);
+	align-items: var(--align);
+	flex-direction: var(--direction);
+}
+
+[flexTail*="cross"]		{--justify:center;--align:center;}	/* все по центру */
+[flexTail*="top"]		{--align:flex-start;}				/* вертикаль верх */
+[flexTail*="bottom"]	{--align:flex-end;}					/* вертикаль низ */
+[flexTail*="centerV"]	{--align:center;}					/* вертикаль центр */
+[flexTail*="left"]		{--justify:flex-start;}				/* горизонталь лево */
+[flexTail*="right"]		{--justify:flex-end;}				/* горизонталь право */
+[flexTail*="centerH"]	{--justify:center;}					/* горизонталь центр */
+
+[flexTail*="stretch"] 	{--align:stretch;}					/* Выравнивание элементов по высоте */
+
+[flexTail]>* {width: calc(((100% - ((var(--col) - 1) * var(--gap))) / var(--col)) * (var(--span)) + ((var(--span) - 1) * var(--gap)));}
+[flexTail*="innerWidth"]>* {width: auto;}
+/*Флекс контейнеры*/
+
+/*Грид контейнеры*/
+[gridTail] {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-gap: var(--gap);
+}
+
+[gridTail]>* {
+  grid-row: auto / span var(--row-d, var(--row));
+  grid-column: auto / span var(--col-d, var(--col));
+}
+
+[gridTail*="dense"] {grid-auto-flow: dense;}			/*Заполнение пустот через изменение порядка элементов*/
+[gridTail*="vertical"] {grid-auto-rows: min-content;}	/*Защита от переполнения*/
+
+[gridTail] > [imgWrap] img {
+    
+	--aspect: calc(var(--col) / var(--row)); /*переопределение соотношения сторон по грид сетке*/
+}
+[gridTail] > [imgWrap*="land"] {
+	--col-d: var(--row);
+	--row-d: var(--col);
+}
+/*Грид контейнеры*/
